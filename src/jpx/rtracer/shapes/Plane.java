@@ -6,7 +6,6 @@ import org.joml.Vector3fc;
 import jpx.rtracer.Intersection;
 import jpx.rtracer.Ray;
 
-//TODO: change origin to be the geometric center
 public class Plane implements Geometry {
 
 	public Vector3fc axisH;
@@ -25,13 +24,13 @@ public class Plane implements Geometry {
 	}
 
 	@Override
-	public Intersection intersects(Vector3fc origin0, Ray ray) {
+	public Intersection intersects(Vector3fc geomOrigin, Ray ray) {
 		float nDotRaySegment = normal.dot(ray.segment);
 		if( nDotRaySegment == 0) {
 			return null;
 		}
 		
-		Vector3f origin = new Vector3f(axisH).add(axisV).div(2).negate().add(origin0); 
+		Vector3f origin = new Vector3f(axisH).add(axisV).div(2).negate().add(geomOrigin); 
 		
 		float d = normal.dot(origin); 
 		float nDotRayOrigin = normal.dot(ray.origin);
